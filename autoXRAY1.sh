@@ -234,11 +234,6 @@ cat << 'EOF' | envsubst > "$SCRIPT_DIR/config.json"
         ],
         "decryption": "none",
         "fallbacks": [
-		     {
-            "path": "/${path_xhttp}22",
-            "dest": "@vless-ws",
-            "xver": 2
-          },
           {
             "dest": "3333",
             "xver": 2
@@ -328,6 +323,11 @@ cat << 'EOF' | envsubst > "$SCRIPT_DIR/config.json"
         ],
         "decryption": "none",
         "fallbacks": [
+				     {
+            "path": "/${path_xhttp}22",
+            "dest": "@vless-ws",
+            "xver": 2
+          },
           {
             "path": "/ssws",
             "dest": "4001"
