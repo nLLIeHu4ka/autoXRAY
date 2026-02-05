@@ -832,6 +832,24 @@ OUT_WS='{
     "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
   }
 }'
+# --- Config 7
+OUT_WS2='{
+  "tag": "proxy",
+  "protocol": "vless",
+  "settings": {
+    "vnext": [{
+      "address": "page2.nlliehu4ka.nl",
+      "port": 8443,
+      "users": [{ "id": "${xray_uuid_vrv}", "encryption": "none" }]
+    }]
+  },
+  "streamSettings": {
+    "network": "ws",
+    "wsSettings": { "path": "/${path_xhttp}22" },
+    "security": "tls",
+    "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
+  }
+}'
 
 
 
@@ -848,6 +866,8 @@ OUT_WS='{
   print_config "$OUT_GRPC"      "🇪🇺 VLESS gRPC TLS"
   echo ","
   print_config "$OUT_WS"        "🇪🇺 VLESS WS TLS"
+  echo ","
+  print_config "$OUT_WS2"      "🇪🇺 VLESS WS2 TLS"
   echo "]"
 ) | envsubst > "$WEB_PATH/$path_subpage.json"
 
@@ -873,6 +893,9 @@ linkTLS3="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=ws&headerType=
 
 linkTLS4="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=grpc&headerType=&serviceName=${path_xhttp}11&host=&sni=$DOMAIN&fp=chrome&spx=%2F#vlessGRPCtls-autoXRAY"
 
+linkTLS5="vless://${xray_uuid_vrv}@page2.nlliehu4ka.nl:8443?security=tls&type=ws&headerType=&path=%2F${path_xhttp}22&host=&sni=page2.nlliehu4ka.nl&fp=chrome&spx=%2F#vlessWStls-autoXRAY"
+
+
 configListLink="https://$DOMAIN/$path_subpage.html"
 
 CONFIGS_ARRAY=(
@@ -882,6 +905,7 @@ CONFIGS_ARRAY=(
 	"VLESS XHTTP TLS EXTRA|$linkTLS2"
 	"VLESS WS TLS|$linkTLS3"
 	"VLESS GRPC TLS|$linkTLS4"
+	"VLESS WS2 TLS|$linkTLS5"
 )
 ALL_LINKS_TEXT=""
 
