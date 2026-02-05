@@ -2,6 +2,7 @@
 [[ $EUID -eq 0 ]] || { echo "❌ скрипту нужны root права"; exit 1; }
 
 DOMAIN=$1
+DOMAIN2=page2.nlliehu4ka.nl
 
 if [ -z "$DOMAIN" ]; then
     echo "❌ Ошибка: домен не задан."
