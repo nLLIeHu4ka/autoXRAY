@@ -839,7 +839,7 @@ OUT_WS2='{
   "protocol": "vless",
   "settings": {
     "vnext": [{
-      "address": "page2.nlliehu4ka.nl",
+      "address": "$DOMAIN2",
       "port": 8443,
       "users": [{ "id": "${xray_uuid_vrv}", "encryption": "none" }]
     }]
@@ -851,7 +851,42 @@ OUT_WS2='{
     "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
   }
 }'
-
+# --- Config 8
+OUT_XHTTP2='{
+  "tag": "proxy",
+  "protocol": "vless",
+  "settings": {
+    "vnext": [{
+      "address": "$DOMAIN2",
+      "port": 8443,
+      "users": [{ "id": "${xray_uuid_vrv}", "encryption": "none" }]
+    }]
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+		"extra": {
+			"headers": {
+			},
+			"noGRPCHeader": false,
+			"scMaxEachPostBytes": 1500000,
+			"scMinPostsIntervalMs": 20,
+			"scStreamUpServerSecs": "60-240",
+			"xPaddingBytes": "400-800",
+			"xmux": {
+				"cMaxReuseTimes": "1000-3000",
+				"hKeepAlivePeriod": 0,
+				"hMaxRequestTimes": "400-700",
+				"hMaxReusableSecs": "1200-1800",
+				"maxConcurrency": "3-5",
+				"maxConnections": 0
+			}
+		},
+	"mode": "auto", "path": "/${path_xhttp}" },
+    "security": "tls",
+    "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
+  }
+}'
 
 
 (
@@ -869,6 +904,8 @@ OUT_WS2='{
   print_config "$OUT_WS"        "🇪🇺 VLESS WS TLS"
   echo ","
   print_config "$OUT_WS2"      "🇪🇺 VLESS WS2 TLS"
+  echo ","
+  print_config "$OUT_XHTTP2"     "🇪🇺 VLESS XHTTP2 TLS EXTRA"
   echo "]"
 ) | envsubst > "$WEB_PATH/$path_subpage.json"
 
@@ -894,7 +931,10 @@ linkTLS3="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=ws&headerType=
 
 linkTLS4="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=grpc&headerType=&serviceName=${path_xhttp}11&host=&sni=$DOMAIN&fp=chrome&spx=%2F#vlessGRPCtls-autoXRAY"
 
-linkTLS5="vless://${xray_uuid_vrv}@page2.nlliehu4ka.nl:8443?security=tls&type=ws&headerType=&path=%2F${path_xhttp}22&host=&sni=page2.nlliehu4ka.nl&fp=chrome&spx=%2F#vlessWStls-autoXRAY"
+linkTLS5="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=ws&headerType=&path=%2F${path_xhttp}22&host=&sni=$DOMAIN&fp=chrome&spx=%2F#vlessWStls-autoXRAY"
+
+linkTLS6="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=xhttp&headerType=&path=%2F${path_xhttp}&host=&mode=auto&extra=%7B%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A%221000-3000%22%2C%22maxConcurrency%22%3A%223-5%22%2C%22maxConnections%22%3A0%2C%22hKeepAlivePeriod%22%3A0%2C%22hMaxRequestTimes%22%3A%22400-700%22%2C%22hMaxReusableSecs%22%3A%221200-1800%22%7D%2C%22headers%22%3A%7B%7D%2C%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22400-800%22%2C%22scMaxEachPostBytes%22%3A1500000%2C%22scMinPostsIntervalMs%22%3A20%2C%22scStreamUpServerSecs%22%3A%2260-240%22%7D&sni=$DOMAIN&fp=chrome&spx=%2F#vlessXHTTPtls-autoXRAY"
+
 
 
 configListLink="https://$DOMAIN/$path_subpage.html"
@@ -907,6 +947,7 @@ CONFIGS_ARRAY=(
 	"VLESS WS TLS|$linkTLS3"
 	"VLESS GRPC TLS|$linkTLS4"
 	"VLESS WS2 TLS|$linkTLS5"
+	"VLESS XHTTP2 TLS EXTRA|$linkTLS6"
 )
 ALL_LINKS_TEXT=""
 
