@@ -49,7 +49,7 @@ WEB_PATH="/var/www/$DOMAIN"
 mkdir -p "$WEB_PATH"
 
 # Генерируем сайт маскировку
-bash -c "$(curl -L https://github.com/xVRVx/autoXRAY/raw/refs/heads/main/test/gen_page2.sh)" -- $WEB_PATH
+bash -c "$(curl -L https://github.com/nlliehu4ka/autoXRAY/raw/refs/heads/main/test/gen_page2.sh)" -- $WEB_PATH
 
 # Установка Xray
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
@@ -1019,15 +1019,6 @@ cat >> "$WEB_PATH/$path_subpage.html" <<EOF
     <a href="https://t.me/socks?server=$DOMAIN&port=10443&user=${socksUser}&pass=${socksPasw}" target="_blank" class="btn-action qr-btn" title="автодобавление в тг" style="text-decoration:none">✈️ Add to TG</a>
 </div>
 
-<h2>💠 Все конфиги вместе</h2>
-<div class="config-row">
-    <div class="config-code" id="cAll" style="max-height:60px;white-space:pre-wrap;word-break:break-all">$ALL_LINKS_TEXT</div>
-    <button class="btn-action copy-btn" onclick="copyText('cAll', this)">Copy ALL</button>
-    <button class="btn-action qr-btn" onclick="showQR('cAll')">QR</button>
-</div>
-
-<div><a style="color:white;margin:40px auto 20px;display:block;text-align:center;" href="https://github.com/xVRVx/autoXRAY">https://github.com/xVRVx/autoXRAY</a></div>
-
 <div id="qrModal" class="modal-overlay"><div class="modal-content"><div id="qrcode"></div><button class="close-modal-btn" onclick="closeModal()">Close</button></div></div>
 </body></html>
 EOF
@@ -1056,7 +1047,5 @@ $linkRTY2
 	для vless v2RayTun или Throne
 
 Открыт локальный socks5 на порту 10808, 2080 и http на 10809.
-
-Поддержать автора: https://github.com/xVRVx/autoXRAY
 
 "
