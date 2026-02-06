@@ -848,7 +848,7 @@ OUT_WS2='{
     "network": "ws",
     "wsSettings": { "path": "/${path_xhttp}22" },
     "security": "tls",
-    "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
+    "tlsSettings": { "serverName": "$DOMAIN2", "fingerprint": "chrome" }
   }
 }'
 # --- Config 8
@@ -884,7 +884,7 @@ OUT_XHTTP2='{
 		},
 	"mode": "auto", "path": "/${path_xhttp}" },
     "security": "tls",
-    "tlsSettings": { "serverName": "$DOMAIN", "fingerprint": "chrome" }
+    "tlsSettings": { "serverName": "$DOMAIN2", "fingerprint": "chrome" }
   }
 }'
 
@@ -931,9 +931,9 @@ linkTLS3="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=ws&headerType=
 
 linkTLS4="vless://${xray_uuid_vrv}@$DOMAIN:8443?security=tls&type=grpc&headerType=&serviceName=${path_xhttp}11&host=&sni=$DOMAIN&fp=chrome&spx=%2F#vlessGRPCtls-autoXRAY"
 
-linkTLS5="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=ws&headerType=&path=%2F${path_xhttp}22&host=&sni=$DOMAIN&fp=chrome&spx=%2F#vlessWStls-autoXRAY"
+linkTLS5="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=ws&headerType=&path=%2F${path_xhttp}22&host=&sni=$DOMAIN2&fp=chrome&spx=%2F#vlessWStls-autoXRAY"
 
-linkTLS6="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=xhttp&headerType=&path=%2F${path_xhttp}&host=&mode=auto&extra=%7B%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A%221000-3000%22%2C%22maxConcurrency%22%3A%223-5%22%2C%22maxConnections%22%3A0%2C%22hKeepAlivePeriod%22%3A0%2C%22hMaxRequestTimes%22%3A%22400-700%22%2C%22hMaxReusableSecs%22%3A%221200-1800%22%7D%2C%22headers%22%3A%7B%7D%2C%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22400-800%22%2C%22scMaxEachPostBytes%22%3A1500000%2C%22scMinPostsIntervalMs%22%3A20%2C%22scStreamUpServerSecs%22%3A%2260-240%22%7D&sni=$DOMAIN&fp=chrome&spx=%2F#vlessXHTTPtls-autoXRAY"
+linkTLS6="vless://${xray_uuid_vrv}@$DOMAIN2:8443?security=tls&type=xhttp&headerType=&path=%2F${path_xhttp}&host=&mode=auto&extra=%7B%22xmux%22%3A%7B%22cMaxReuseTimes%22%3A%221000-3000%22%2C%22maxConcurrency%22%3A%223-5%22%2C%22maxConnections%22%3A0%2C%22hKeepAlivePeriod%22%3A0%2C%22hMaxRequestTimes%22%3A%22400-700%22%2C%22hMaxReusableSecs%22%3A%221200-1800%22%7D%2C%22headers%22%3A%7B%7D%2C%22noGRPCHeader%22%3Afalse%2C%22xPaddingBytes%22%3A%22400-800%22%2C%22scMaxEachPostBytes%22%3A1500000%2C%22scMinPostsIntervalMs%22%3A20%2C%22scStreamUpServerSecs%22%3A%2260-240%22%7D&sni=$DOMAIN2&fp=chrome&spx=%2F#vlessXHTTPtls-autoXRAY"
 
 
 
